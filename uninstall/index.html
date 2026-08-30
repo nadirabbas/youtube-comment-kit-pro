@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uninstall Feedback - YouTube Comment Kit</title>
+  <link rel="icon" type="image/png" href="yck-logo.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-base: #0f0f0f;
+      --bg-card: #1b1b1b;
+      --bg-card-hover: #242424;
+      --text-main: #ffffff;
+      --text-sub: #aaaaaa;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-glow: rgba(59, 130, 246, 0.18);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px;
+    }
+
+    .page-wrapper {
+      max-width: 500px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Header Logo */
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .logo-title {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-badge {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-sub);
+      padding: 2px 7px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Main Card */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 22px;
+      width: 100%;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .title-group {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      letter-spacing: -0.4px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.4;
+    }
+
+    /* Option Cards Grid */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .option-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      outline: none;
+    }
+
+    .option-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-1px);
+    }
+
+    .option-card:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .option-card.selected {
+      background: rgba(59, 130, 246, 0.08);
+      border-color: var(--accent);
+      box-shadow: 0 3px 12px var(--accent-glow);
+    }
+
+    .option-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .option-icon {
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    .option-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .option-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .option-subtitle {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .check-indicator {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .option-card.selected .check-indicator {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .check-icon {
+      display: none;
+      width: 9px;
+      height: 7px;
+      stroke: #ffffff;
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    .option-card.selected .check-icon {
+      display: block;
+    }
+
+    /* Optional Textarea */
+    .textarea-wrapper {
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .textarea-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .textarea-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+    }
+
+    .char-count {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.35);
+      font-weight: 500;
+      font-family: monospace;
+    }
+
+    .char-count.near-limit {
+      color: var(--accent);
+    }
+
+    textarea {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      color: var(--text-main);
+      font-size: 13px;
+      line-height: 1.4;
+      resize: vertical;
+      min-height: 54px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    textarea::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Submit Button & Spinner */
+    .submit-btn {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.4);
+      border: none;
+      border-radius: 8px;
+      padding: 11px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: not-allowed;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .submit-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 3px 12px var(--accent-glow);
+    }
+
+    .submit-btn.active:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .submit-btn.active:active {
+      transform: translateY(0);
+    }
+
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Options validation error highlight */
+    .options-grid.has-error {
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-4px); }
+      40%, 80% { transform: translateX(4px); }
+    }
+
+    /* Success Screen */
+    .success-view {
+      display: none;
+      text-align: center;
+      padding: 16px 0 8px 0;
+    }
+
+    .success-logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px auto;
+    }
+
+    .success-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+
+    .success-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .success-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .close-note {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.35);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .card {
+        padding: 28px 20px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <!-- Main Card -->
+    <div class="card">
+      <form id="survey-form">
+        <div class="title-group">
+          <h1>What made you uninstall YCK?</h1>
+        </div>
+
+        <!-- Options Grid -->
+        <div class="options-grid" id="options-grid" role="radiogroup" aria-label="Reason for uninstallation">
+          
+          <div class="option-card" tabindex="0" data-value="missing_feature" role="radio" aria-checked="false">
+            <div class="option-left">
+              <span class="option-icon">🚀</span>
+              <div class="option-text">
+                <span class="option-title">Missing a feature</span>
+                <span class="option-subtitle">Couldn't find or search what I needed</span>
+              </div>
+            </div>
+            <div class="check-indicator">
+              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+            </div>
+          </div>
+
+          <div class="option-card" tabindex="0" data-value="bugs_performance" role="radio" aria-checked="false">
+            <div class="option-left">
+              <span class="option-icon">🐛</span>
+              <div class="option-text">
+                <span class="option-title">Bugs or performance issues</span>
+                <span class="option-subtitle">Slowed down YouTube or felt glitchy</span>
+              </div>
+            </div>
+            <div class="check-indicator">
+              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+            </div>
+          </div>
+
+          <div class="option-card" tabindex="0" data-value="hard_to_use" role="radio" aria-checked="false">
+            <div class="option-left">
+              <span class="option-icon">🧩</span>
+              <div class="option-text">
+                <span class="option-title">Hard to use / confusing</span>
+                <span class="option-subtitle">Interface or setup felt overwhelming</span>
+              </div>
+            </div>
+            <div class="check-indicator">
+              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+            </div>
+          </div>
+
+          <div class="option-card" tabindex="0" data-value="found_alternative" role="radio" aria-checked="false">
+            <div class="option-left">
+              <span class="option-icon">🔄</span>
+              <div class="option-text">
+                <span class="option-title">Found an alternative</span>
+                <span class="option-subtitle">Switching to another tool or extension</span>
+              </div>
+            </div>
+            <div class="check-indicator">
+              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+            </div>
+          </div>
+
+          <div class="option-card" tabindex="0" data-value="temporary_test" role="radio" aria-checked="false">
+            <div class="option-left">
+              <span class="option-icon">⏱️</span>
+              <div class="option-text">
+                <span class="option-title">Just testing / temporarily</span>
+                <span class="option-subtitle">Don't need it right now</span>
+              </div>
+            </div>
+            <div class="check-indicator">
+              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+            </div>
+          </div>
+
+          <div class="option-card" tabindex="0" data-value="other" role="radio" aria-checked="false">
+            <div class="option-left">
+              <span class="option-icon">💬</span>
+              <div class="option-text">
+                <span class="option-title">Other reason</span>
+                <span class="option-subtitle">Something else</span>
+              </div>
+            </div>
+            <div class="check-indicator">
+              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Optional Text Box -->
+        <div class="textarea-wrapper">
+          <div class="textarea-header">
+            <label for="feedback-text" class="textarea-label">Anything specific I can improve? (All criticism welcome)</label>
+            <span id="char-count" class="char-count">0/500</span>
+          </div>
+          <textarea id="feedback-text" name="feedback" rows="3" maxlength="500" placeholder="Don't hold back—tell me what disappointed you or what I could do better..."></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submit-btn" class="submit-btn" disabled>
+          <span>Submit Feedback</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </form>
+
+      <!-- Success Screen (Hidden by default) -->
+      <div id="success-view" class="success-view">
+        <div class="success-logo-wrap">
+          <img src="yck-logo.png" alt="YCK Logo" class="success-logo" onerror="this.onerror=null; this.src='../pro-purchase-successful/yck-logo.png';" />
+        </div>
+        <h2 class="success-title">Thank You!</h2>
+        <p class="success-desc">
+          Your feedback has been received. Thank you for helping me improve YCK!
+        </p>
+        <div class="close-note">You can close this tab now.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const cards = document.querySelectorAll('.option-card');
+      const submitBtn = document.getElementById('submit-btn');
+      const form = document.getElementById('survey-form');
+      const successView = document.getElementById('success-view');
+      const feedbackInput = document.getElementById('feedback-text');
+      const charCount = document.getElementById('char-count');
+      const optionsGrid = document.getElementById('options-grid');
+
+      let selectedReason = null;
+
+      // Disguised telemetry session storage key
+      const STORAGE_KEY = '_ga_stat_v3';
+
+      function getSubmitCount() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return 0;
+          const decoded = atob(raw);
+          const parts = decoded.split('.');
+          if (parts.length >= 3) {
+            const count = parseInt(parts[1], 10);
+            return isNaN(count) ? 0 : count;
+          }
+        } catch (_) {}
+        return 0;
+      }
+
+      function incrementSubmitCount() {
+        try {
+          const current = getSubmitCount();
+          const next = current + 1;
+          const ts = Math.floor(Date.now() / 1000);
+          const hash = Math.random().toString(36).substring(2, 10);
+          const payload = btoa(`${ts}.${next}.${hash}`);
+          localStorage.setItem(STORAGE_KEY, payload);
+        } catch (_) {}
+      }
+
+      // Character count listener for 500 max limit
+      feedbackInput.addEventListener('input', () => {
+        const len = feedbackInput.value.length;
+        charCount.textContent = `${len}/500`;
+        if (len >= 450) {
+          charCount.classList.add('near-limit');
+        } else {
+          charCount.classList.remove('near-limit');
+        }
+      });
+
+      function selectCard(card) {
+        optionsGrid.classList.remove('has-error');
+        cards.forEach(c => {
+          c.classList.remove('selected');
+          c.setAttribute('aria-checked', 'false');
+        });
+
+        card.classList.add('selected');
+        card.setAttribute('aria-checked', 'true');
+        selectedReason = card.dataset.value;
+
+        // Activate submit button
+        submitBtn.disabled = false;
+        submitBtn.classList.add('active');
+
+        // Focus feedback textarea if "Other" or "Missing a feature" is chosen
+        if (selectedReason === 'other' || selectedReason === 'missing_feature') {
+          feedbackInput.focus();
+        }
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', () => selectCard(card));
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectCard(card);
+          }
+        });
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Validation check
+        if (!selectedReason) {
+          optionsGrid.classList.add('has-error');
+          return;
+        }
+
+        // Show spinner state inside submit button
+        submitBtn.disabled = true;
+        submitBtn.classList.remove('active');
+        submitBtn.innerHTML = '<span class="spinner"></span><span>Submitting...</span>';
+
+        const currentCount = getSubmitCount();
+
+        // If user already successfully submitted 3 times, fake success silently without sending network request
+        if (currentCount >= 3) {
+          setTimeout(() => {
+            form.style.display = 'none';
+            successView.style.display = 'block';
+          }, 350);
+          return;
+        }
+
+        const payload = {
+          reason: selectedReason,
+          feedback_text: feedbackInput.value.slice(0, 500).trim(),
+          timestamp: new Date().toISOString()
+        };
+
+        // Silently submit in background—never notify user if fetch fails
+        try {
+          const res = await fetch('https://yt-comment-kit-uninstall-feedback.nadirabbas.workers.dev/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (res.ok) {
+            incrementSubmitCount();
+          }
+        } catch (_) {
+          // Silently ignore network failures or CORS errors
+        }
+
+        // Seamless transition to success view
+        setTimeout(() => {
+          form.style.display = 'none';
+          successView.style.display = 'block';
+        }, 300);
+      });
+    })();
+  </script>
+
+</body>
+</html>
