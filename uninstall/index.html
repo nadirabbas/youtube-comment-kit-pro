@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0" />
   <title>Uninstall Feedback - YouTube Comment Kit</title>
-  <link rel="icon" type="image/png" href="yck-logo.png" />
+  <link rel="icon"
+    type="image/png"
+    href="yck-logo.png" />
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect"
+    href="https://fonts.googleapis.com" />
+  <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
 
   <style>
     :root {
@@ -40,7 +48,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px 16px;
+      padding: 16px 12px;
     }
 
     .page-wrapper {
@@ -49,7 +57,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
     }
 
     /* Header Logo */
@@ -87,7 +95,7 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 24px 22px;
+      padding: 20px 20px;
       width: 100%;
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
       transition: all 0.3s ease;
@@ -95,28 +103,28 @@
 
     .title-group {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
 
     h1 {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 800;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       letter-spacing: -0.4px;
     }
 
     .subtitle {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-sub);
       line-height: 1.4;
     }
 
-    /* Option Cards Grid */
+    /* Option Cards List */
     .options-grid {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 7px;
+      margin-bottom: 14px;
     }
 
     .option-card {
@@ -125,8 +133,8 @@
       justify-content: space-between;
       background: rgba(255, 255, 255, 0.03);
       border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 14px;
+      border-radius: 9px;
+      padding: 9px 12px;
       cursor: pointer;
       user-select: none;
       transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -157,25 +165,15 @@
     }
 
     .option-icon {
-      font-size: 19px;
+      font-size: 20px;
       line-height: 1;
-    }
-
-    .option-text {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
+      flex-shrink: 0;
     }
 
     .option-title {
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 600;
       color: var(--text-main);
-    }
-
-    .option-subtitle {
-      font-size: 12px;
-      color: var(--text-sub);
     }
 
     .check-indicator {
@@ -308,7 +306,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     /* Options validation error highlight */
@@ -317,9 +317,21 @@
     }
 
     @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-4px); }
-      40%, 80% { transform: translateX(4px); }
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      20%,
+      60% {
+        transform: translateX(-4px);
+      }
+
+      40%,
+      80% {
+        transform: translateX(4px);
+      }
     }
 
     /* Success Screen */
@@ -363,16 +375,52 @@
       padding-top: 16px;
     }
 
-    @media (max-width: 480px) {
-      .card {
-        padding: 28px 20px;
+    @media (max-height: 680px), (max-width: 480px) {
+      .page-wrapper {
+        gap: 10px;
       }
+
+      .card {
+        padding: 16px 16px;
+      }
+
+      .title-group {
+        margin-bottom: 10px;
+      }
+
       h1 {
-        font-size: 20px;
+        font-size: 18px;
+      }
+
+      .options-grid {
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+
+      .option-card {
+        padding: 7.5px 11px;
+        border-radius: 8px;
+      }
+
+      .option-left {
+        gap: 9px;
+      }
+
+      .option-icon {
+        font-size: 17px;
+      }
+
+      .option-title {
+        font-size: 13px;
+      }
+
+      .textarea-wrapper {
+        margin-bottom: 12px;
       }
     }
   </style>
 </head>
+
 <body>
 
   <div class="page-wrapper">
@@ -384,83 +432,127 @@
         </div>
 
         <!-- Options Grid -->
-        <div class="options-grid" id="options-grid" role="radiogroup" aria-label="Reason for uninstallation">
-          
-          <div class="option-card" tabindex="0" data-value="missing_feature" role="radio" aria-checked="false">
+        <div class="options-grid"
+          id="options-grid"
+          role="radiogroup"
+          aria-label="Reason for uninstallation">
+
+          <div class="option-card"
+            tabindex="0"
+            data-value="missing_feature"
+            role="radio"
+            aria-checked="false">
             <div class="option-left">
               <span class="option-icon">🚀</span>
-              <div class="option-text">
-                <span class="option-title">Missing a feature</span>
-                <span class="option-subtitle">Couldn't find or search what I needed</span>
-              </div>
+              <span class="option-title">Missing a feature</span>
             </div>
             <div class="check-indicator">
-              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+              <svg class="check-icon"
+                viewBox="0 0 10 8">
+                <polyline points="1 4 3.5 6.5 9 1"></polyline>
+              </svg>
             </div>
           </div>
 
-          <div class="option-card" tabindex="0" data-value="bugs_performance" role="radio" aria-checked="false">
+          <div class="option-card"
+            tabindex="0"
+            data-value="bugs"
+            role="radio"
+            aria-checked="false">
             <div class="option-left">
               <span class="option-icon">🐛</span>
-              <div class="option-text">
-                <span class="option-title">Bugs or performance issues</span>
-                <span class="option-subtitle">Slowed down YouTube or felt glitchy</span>
-              </div>
+              <span class="option-title">Bugs or glitches</span>
             </div>
             <div class="check-indicator">
-              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+              <svg class="check-icon"
+                viewBox="0 0 10 8">
+                <polyline points="1 4 3.5 6.5 9 1"></polyline>
+              </svg>
             </div>
           </div>
 
-          <div class="option-card" tabindex="0" data-value="hard_to_use" role="radio" aria-checked="false">
+          <div class="option-card"
+            tabindex="0"
+            data-value="performance"
+            role="radio"
+            aria-checked="false">
+            <div class="option-left">
+              <span class="option-icon">⚡</span>
+              <span class="option-title">Slow performance / laggy</span>
+            </div>
+            <div class="check-indicator">
+              <svg class="check-icon"
+                viewBox="0 0 10 8">
+                <polyline points="1 4 3.5 6.5 9 1"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <div class="option-card"
+            tabindex="0"
+            data-value="hard_to_use"
+            role="radio"
+            aria-checked="false">
             <div class="option-left">
               <span class="option-icon">🧩</span>
-              <div class="option-text">
-                <span class="option-title">Hard to use / confusing</span>
-                <span class="option-subtitle">Interface or setup felt overwhelming</span>
-              </div>
+              <span class="option-title">Hard to use / confusing</span>
             </div>
             <div class="check-indicator">
-              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+              <svg class="check-icon"
+                viewBox="0 0 10 8">
+                <polyline points="1 4 3.5 6.5 9 1"></polyline>
+              </svg>
             </div>
           </div>
 
-          <div class="option-card" tabindex="0" data-value="found_alternative" role="radio" aria-checked="false">
+          <div class="option-card"
+            tabindex="0"
+            data-value="found_alternative"
+            role="radio"
+            aria-checked="false">
             <div class="option-left">
               <span class="option-icon">🔄</span>
-              <div class="option-text">
-                <span class="option-title">Found an alternative</span>
-                <span class="option-subtitle">Switching to another tool or extension</span>
-              </div>
+              <span class="option-title">Found an alternative</span>
             </div>
             <div class="check-indicator">
-              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+              <svg class="check-icon"
+                viewBox="0 0 10 8">
+                <polyline points="1 4 3.5 6.5 9 1"></polyline>
+              </svg>
             </div>
           </div>
 
-          <div class="option-card" tabindex="0" data-value="temporary_test" role="radio" aria-checked="false">
+          <div class="option-card"
+            tabindex="0"
+            data-value="temporary_test"
+            role="radio"
+            aria-checked="false">
             <div class="option-left">
               <span class="option-icon">⏱️</span>
-              <div class="option-text">
-                <span class="option-title">Just testing / temporarily</span>
-                <span class="option-subtitle">Don't need it right now</span>
-              </div>
+              <span class="option-title">Just testing / temporarily</span>
             </div>
             <div class="check-indicator">
-              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+              <svg class="check-icon"
+                viewBox="0 0 10 8">
+                <polyline points="1 4 3.5 6.5 9 1"></polyline>
+              </svg>
             </div>
           </div>
 
-          <div class="option-card" tabindex="0" data-value="other" role="radio" aria-checked="false">
+          <div class="option-card"
+            tabindex="0"
+            data-value="other"
+            role="radio"
+            aria-checked="false">
             <div class="option-left">
               <span class="option-icon">💬</span>
-              <div class="option-text">
-                <span class="option-title">Other reason</span>
-                <span class="option-subtitle">Something else</span>
-              </div>
+              <span class="option-title">Other reason</span>
             </div>
             <div class="check-indicator">
-              <svg class="check-icon" viewBox="0 0 10 8"><polyline points="1 4 3.5 6.5 9 1"></polyline></svg>
+              <svg class="check-icon"
+                viewBox="0 0 10 8">
+                <polyline points="1 4 3.5 6.5 9 1"></polyline>
+              </svg>
             </div>
           </div>
 
@@ -469,23 +561,50 @@
         <!-- Optional Text Box -->
         <div class="textarea-wrapper">
           <div class="textarea-header">
-            <label for="feedback-text" class="textarea-label">Anything specific I can improve? (All criticism welcome)</label>
-            <span id="char-count" class="char-count">0/500</span>
+            <label for="feedback-text"
+              class="textarea-label"
+              id="textarea-label">Anything specific I can improve? (Optional — helps me improve YCK)</label>
+            <span id="char-count"
+              class="char-count">0/500</span>
           </div>
-          <textarea id="feedback-text" name="feedback" rows="3" maxlength="500" placeholder="Don't hold back—tell me what disappointed you or what I could do better..."></textarea>
+          <textarea id="feedback-text"
+            name="feedback"
+            rows="3"
+            maxlength="500"
+            placeholder="Don't hold back—tell me what disappointed you or what I could do better..."></textarea>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" id="submit-btn" class="submit-btn" disabled>
+        <button type="submit"
+          id="submit-btn"
+          class="submit-btn"
+          disabled>
           <span>Submit Feedback</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          <svg width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="5"
+              y1="12"
+              x2="19"
+              y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
         </button>
       </form>
 
       <!-- Success Screen (Hidden by default) -->
-      <div id="success-view" class="success-view">
+      <div id="success-view"
+        class="success-view">
         <div class="success-logo-wrap">
-          <img src="yck-logo.png" alt="YCK Logo" class="success-logo" onerror="this.onerror=null; this.src='../pro-purchase-successful/yck-logo.png';" />
+          <img src="yck-logo.png"
+            alt="YCK Logo"
+            class="success-logo"
+            onerror="this.onerror=null; this.src='../pro-purchase-successful/yck-logo.png';" />
         </div>
         <h2 class="success-title">Thank You!</h2>
         <p class="success-desc">
@@ -503,10 +622,42 @@
       const form = document.getElementById('survey-form');
       const successView = document.getElementById('success-view');
       const feedbackInput = document.getElementById('feedback-text');
+      const textareaLabel = document.getElementById('textarea-label');
       const charCount = document.getElementById('char-count');
       const optionsGrid = document.getElementById('options-grid');
 
       let selectedReason = null;
+
+      const REASON_PROMPTS = {
+        missing_feature: {
+          label: 'Which feature was missing? (Optional — helps me improve YCK)',
+          placeholder: 'What feature did you wish YCK had?'
+        },
+        bugs: {
+          label: 'What bug or glitch did you run into? (Optional — helps me fix it)',
+          placeholder: 'Describe what broke or didn\'t work as expected so I can fix it...'
+        },
+        performance: {
+          label: 'What performance issue did you experience? (Optional — helps me optimize YCK)',
+          placeholder: 'Tell me how YCK slowed down YouTube or felt laggy...'
+        },
+        hard_to_use: {
+          label: 'What was confusing or hard to use? (Optional — helps me improve YCK)',
+          placeholder: 'Tell me what was confusing or which part felt overwhelming...'
+        },
+        found_alternative: {
+          label: 'Which alternative are you switching to? (Optional — helps me improve YCK)',
+          placeholder: 'What tool or extension are you using instead, and what does it do better?'
+        },
+        temporary_test: {
+          label: 'Any feedback before you go? (Optional — helps me improve YCK)',
+          placeholder: 'What would make YCK worth keeping for you in the future?'
+        },
+        other: {
+          label: 'Can you share more details? (Optional — helps me improve YCK)',
+          placeholder: 'Tell me a bit more about why you\'re uninstalling YCK...'
+        }
+      };
 
       // Disguised telemetry session storage key
       const STORAGE_KEY = '_ga_stat_v3';
@@ -521,7 +672,7 @@
             const count = parseInt(parts[1], 10);
             return isNaN(count) ? 0 : count;
           }
-        } catch (_) {}
+        } catch (_) { }
         return 0;
       }
 
@@ -533,7 +684,7 @@
           const hash = Math.random().toString(36).substring(2, 10);
           const payload = btoa(`${ts}.${next}.${hash}`);
           localStorage.setItem(STORAGE_KEY, payload);
-        } catch (_) {}
+        } catch (_) { }
       }
 
       // Character count listener for 500 max limit
@@ -558,14 +709,19 @@
         card.setAttribute('aria-checked', 'true');
         selectedReason = card.dataset.value;
 
+        // Dynamic label & placeholder updates based on selected reason
+        const promptInfo = REASON_PROMPTS[selectedReason];
+        if (promptInfo) {
+          if (textareaLabel) textareaLabel.textContent = promptInfo.label;
+          if (feedbackInput) feedbackInput.placeholder = promptInfo.placeholder;
+        }
+
         // Activate submit button
         submitBtn.disabled = false;
         submitBtn.classList.add('active');
 
-        // Focus feedback textarea if "Other" or "Missing a feature" is chosen
-        if (selectedReason === 'other' || selectedReason === 'missing_feature') {
-          feedbackInput.focus();
-        }
+        // Automatically focus feedback textarea for all selected reasons
+        feedbackInput.focus();
       }
 
       cards.forEach(card => {
@@ -634,4 +790,5 @@
   </script>
 
 </body>
+
 </html>
