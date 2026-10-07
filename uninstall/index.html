@@ -456,6 +456,23 @@
 
           <div class="option-card"
             tabindex="0"
+            data-value="didnt_work"
+            role="radio"
+            aria-checked="false">
+            <div class="option-left">
+              <span class="option-icon">⚠️</span>
+              <span class="option-title">Extension didn't work correctly</span>
+            </div>
+            <div class="check-indicator">
+              <svg class="check-icon"
+                viewBox="0 0 10 8">
+                <polyline points="1 4 3.5 6.5 9 1"></polyline>
+              </svg>
+            </div>
+          </div>
+
+          <div class="option-card"
+            tabindex="0"
             data-value="bugs"
             role="radio"
             aria-checked="false">
@@ -632,6 +649,10 @@
         missing_feature: {
           label: 'Which feature was missing? (Optional — helps me improve YCK)',
           placeholder: 'What feature did you wish YCK had?'
+        },
+        didnt_work: {
+          label: 'What didn\'t work correctly? (Optional — helps me fix it)',
+          placeholder: 'Tell me what failed to load or work properly...'
         },
         bugs: {
           label: 'What bug or glitch did you run into? (Optional — helps me fix it)',
